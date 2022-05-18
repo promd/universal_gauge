@@ -1,14 +1,19 @@
 #include <Arduino.h>
 
-//#include <ESP8266WiFi.h>
+#if defined(ESP8266)
+#include <ESP8266WiFi.h>
+#elif defined(ESP32)
 #include <WiFi.h>
+#else
+#error "This ain't a ESP8266 or ESP32, dumbo!"
+#endif
 #include <Adafruit_NeoPixel.h>
 #include <PubSubClient.h>
 #include <ArduinoJson.h>
 #include <CREDENTIALS.h>
 
 // Which pin on the Arduino is connected to the NeoPixels?
-#define PIN       16
+#define PIN       D8
 
 // How many NeoPixels are attached to the Arduino?
 #define NUMPIXELS 36 // Make this large enough to make the maximum number of LEDs work!
@@ -111,7 +116,7 @@ void reconnect() {
   // Loop until we're reconnected
   while (!client.connected()) {
     // Create a random client ID
-    char myId[16] = "000";
+    char myId[16] = "004";
     //sprintf(myId, "uniGauge-%04X", random(0xffff));
 
     Serial.printf("Attempting MQTT connection as %s...\n",myId);

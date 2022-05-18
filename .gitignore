@@ -1,3 +1,4 @@
 .pio
 .vscode
 include/CREDENTIALS.h
+lib/CREDENTIALS/CREDENTIALS.h
